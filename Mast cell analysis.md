@@ -121,7 +121,7 @@ DimPlot(Mastcell, group.by = "celltype",pt.size = 2,cols = allcolour)+theme_dr()
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("Mast cell subclusters")+theme(plot.title = element_text(size = 20, hjust = 0.5)) # 800*600
 ```
-![Mast cell subclusters](Dimplot%20for%20mast%20cell%20subclusters.svg)
+![Alt text](Basic%20analysis/Dimplot%20for%20mast%20cell%20subclusters.svg)
 ```r
 tissuecolor <- c("#C6307C", "#4991C1")
 names(tissuecolor) <- c("Epithelium", "LP")
@@ -133,7 +133,7 @@ DimPlot(Mastcell, group.by = "tissue",pt.size = 2,cols = tissuecolor)+theme_dr()
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("Mast cell origins")+theme(plot.title = element_text(size = 20, hjust = 0.5)) # 850*600
 ```
-![Mast cell origins](Dimplot%20for%20Mast%20cell%20origins.svg)
+![Alt text](Basic%20analysis/Dimplot%20for%20Mast%20cell%20origins.svg)
  
 ```r
 DimPlot(Mastcell, group.by = "group",pt.size = 2,cols = allcolour)+theme_dr()  + 
@@ -142,20 +142,20 @@ DimPlot(Mastcell, group.by = "group",pt.size = 2,cols = allcolour)+theme_dr()  +
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("Mast cell samples")+theme(plot.title = element_text(size = 20, hjust = 0.5)) # 800*600
 ```
-![Alt text](Dimplot%20for%20mast%20cell%20by%20group.svg)
+![Alt text](Basic%20analysis/Dimplot%20for%20mast%20cell%20by%20group.svg)
 
 ```r
 FeaturePlot(MC, features = c("Mki67", "Lrmda", "Mcpt9", "Nr4a1")) #700*600
 ```
-![Alt text](FeaturePlot.svg)
+![Alt text](Basic%20analysis/FeaturePlot.svg)
 ```r
 DotPlot(MC,features = c("Mki67", "Lrmda", "Mcpt9", "Nr4a1"), group.by = "group") #700*600
 ```
-![Alt text](Dotplot.svg)
+![Alt text](Basic%20analysis/Dotplot.svg)
 ```r
 DotPlot(MC,features = c("Mki67", "Lrmda", "Mcpt9", "Nr4a1"), group.by = "celltype") #700*600
 ```
-![Alt text](Dotplot%20by%20celltype.svg)
+![Alt text](Basic%20analysis/Dotplot%20by%20celltype.svg)
 
 ### 1.4) Calculating cell proportion
 
@@ -178,7 +178,7 @@ ggplot(Cellratio) +
   coord_flip()+
   theme(panel.border = element_rect(fill=NA,color="black", size=0.5, linetype="solid"), legend.title= element_blank())+ggtitle("Mast cell subtype proportion in different samples")+theme (text = element_text(size =15),plot.title = element_text (hjust=0.5)) # 700*600
 ```
-![Mast cell subtype proportion in different samples](Mast%20cell%20subtype%20proportion%20in%20different%20samples.svg)
+![Alt text](Basic%20analysis/Mast%20cell%20subtype%20proportion%20in%20different%20samples.svg)
 **Calculating samples proportion in different celltypes:**
 ```r
 Idents(Mastcell) <- "celltype"
@@ -197,7 +197,8 @@ ggplot(Cellratio) +
   coord_flip()+
   theme(panel.border = element_rect(fill=NA,color="black", size=0.5, linetype="solid"), legend.title= element_blank())+ggtitle("Different sample proportion in Mast cell subtype")+theme (text = element_text(size =15),plot.title = element_text (hjust=0.5)) # 700*600
 ```
-![Alt text](Different%20sample%20proportion%20in%20Mast%20cell%20subtype.svg)
+![Alt text](Basic%20analysis/Different%20sample%20proportion%20in%20Mast%20cell%20subtype.svg)
+
 ### 1.5) Heatmap for Mast cell subtype markers
 
 **First, perform pseudobulk analysis for mast cell subtypes:**
@@ -229,7 +230,7 @@ pheatmap(z.scores[unique(top20_Mastcell$gene),],
          legend_labels = "z.scores",
          main = "Pseodobulk heat map for top20 genes or proteins")
 ```
-![Alt text](Heatmap%20for%20z.scores.svg)
+![Alt text](Basic%20analysis/Heatmap%20for%20z.scores.svg)
 
 ### 1.6) BMCP and DN cells projected to Mast cell
 
@@ -299,7 +300,7 @@ DimPlot(merged, group.by = "celltype",pt.size = 2,cols = allcolour)+theme_dr()  
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("BMCP Projection")+theme(plot.title = element_text(size = 20, hjust = 0.5))
 ```
-![BMCP](BMCP%20Projection.svg)
+![Alt text](Projection/BMCP%20Projection.svg)
 ***DN projection***
 
 **Fisrt, project DN(P) to the whole CITE-seq data**
@@ -409,8 +410,8 @@ DimPlot(
         legend.text = element_text(size=15), #设置legend标签的大小
         legend.key.size=unit(0.8,'cm'))+ggtitle("DN(P) Projection")+theme(plot.title = element_text(size = 20, hjust = 0.5)) # 900*600
 ```
-![DN(P) Projection](DN(P)%20Projection.svg)
-![Alt text](DN(Q)%20Projection.svg)
+![Alt text](Projection/DN(P)%20Projection.svg)
+![Alt text](Projection/DN(Q)%20Projection.svg)
 **Second, subset DN(P) which were projected to mast cells**
 ```r
 small <- subset(small, predicted.id == "Mast cell")
@@ -462,8 +463,8 @@ DimPlot(merged, group.by = "celltype",pt.size = 2,cols = allcolour)+theme_dr()  
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("DN(P) Projection")+theme(plot.title = element_text(size = 20, hjust = 0.5))
 ```
-![DN(P)Projection](DN(P)%20Projection%20to%20MC.svg)
-![Alt text](DN(Q)%20Projection%20to%20MC.svg)
+![Alt text](Projection/DN(P)%20Projection%20to%20MC.svg)
+![Alt text](Projection/DN(Q)%20Projection%20to%20MC.svg)
 
 
 ### 1.7) CytoTRACE and CytoTRACE2 for Mast cells
@@ -523,9 +524,9 @@ ggplot(tmp, aes(x = DC1, y = DC2, colour = Clusters)) +
         legend.text = element_text(size=20), #设置legend标签的大小
         legend.key.size=unit(1,'cm'))+ggtitle("Diffusion Map for Mast Cell")+theme(plot.title = element_text(size = 20, hjust = 0.5)) # 900*600 for celltype 800*600 for group
 ```
-![Alt text](Diffusion%20map%20for%20celltype.svg)
-![Alt text](Diffusion%20map%20for%20group.svg)
-![Alt text](Diffusion%20map%20for%20tissue.svg)
+![Alt text](Diffusionmap/Diffusion%20map%20for%20celltype.svg)
+![Alt text](Diffusionmap/Diffusion%20map%20for%20group.svg)
+![Alt text](Diffusionmap/Diffusion%20map%20for%20tissue.svg)
 ```r
 #interactive 3D
 library(plotly)
@@ -568,9 +569,9 @@ p = plot_ly(x=tmp$DC1, y=tmp$DC2, z=tmp$DC3, type="scatter3d", mode="markers", c
 htmlwidgets::saveWidget(as_widget(p), "Interactive3D.html", title = "Diffusion map")
 p #1000*600
 ```
-![Alt text](3D%20diffusionmap%20for%20MC%20celltype.png)
-![Alt text](3D%20diffusionmap%20for%20MC%20group.png)
-![Alt text](3D%20diffusionmap%20for%20MC%20tissue.png)
+![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20celltype.png)
+![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20group.png)
+![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20tissue.png)
 #### 2.1.2) dyno
 An R package that can choose the best TI method among 59 methods.
 
@@ -698,7 +699,7 @@ cds <- reduceDimension(cds, reduction_method = 'DDRTree', num_dim = 6, max_compo
 cds <- orderCells(cds)
 ```
 
-```{r}
+```r
 library(viridis)
 library(ggrastr)
 library(ggraph)
@@ -739,7 +740,7 @@ p8=plot_cell_trajectory(cds, color_by = "tissue") +
 p8
 ```
 
-```{r}
+```r
 pData(cds)$Itgae = log2(exprs(cds)['Itgae',]+1)
 p1 = plot_cell_trajectory(cds, color_by = "Itgae") + scale_color_gsea()+theme_dr()  +ggtitle("Itgae expression")+theme (plot.title = element_text (size=15,hjust=0.5))+          theme(panel.grid=element_blank(),
                                                                                                                                                                                                                                                                           legend.text = element_text(size=10))#设置legend标签的大小
@@ -781,6 +782,7 @@ p7 = plot_cell_trajectory(cds, color_by = "Cd34") + scale_color_gsea()+theme_dr(
                                                                                                                                                                                                                                                                           legend.text = element_text(size=10))#设置legend标签的大小
 p7
 ```
+
 ### 2.2) RNA velocity (scVelo)
 #### 2.2.1) Extracting cell information from R
 ```r
@@ -1267,9 +1269,9 @@ p4 = FeaturePlot(sce,features = regulonsToPlot)
 wrap_plots(p1,p2,p3,p4)
 ```
 ***By celltype:***
-![1700*750](Gata2(+)%20and%20Sox4(+)%20by%20MC%20celltype.svg)
+![Alt text](TF%20analysis/Gata2(+)%20and%20Sox4(+)%20by%20MC%20celltype.svg)
 ***By group:***
-![Alt text](Gata2(+)%20and%20Sox4(+)%20by%20MC%20group.svg)
+![Alt text](TF%20analysis/Gata2(+)%20and%20Sox4(+)%20by%20MC%20group.svg)
 ```r
 ### TF活性均值
 # 看看不同单细胞亚群的转录因子活性平均值
@@ -1312,9 +1314,9 @@ Heatmap(
   cluster_columns              = FALSE)
 ```
 ***Heatmap by Celltype:***
-![Heatmap 500*1600](Heatmap%20for%20MC%20TF%20by%20celltype.svg) 
+ ![Alt text](TF%20analysis/Heatmap%20for%20MC%20TF%20by%20celltype.svg)
 ***Heatmap by group:***
-![Heatmap 500*1600](Heatmap%20for%20MC%20TF%20by%20group.svg)
+![Alt text](TF%20analysis/Heatmap%20for%20MC%20TF%20by%20group.svg)
 ```r
 ### 4.2. rss查看特异TF
 rss <- calcRSS(AUC=getAUC(sub_regulonAUC), 
@@ -1324,9 +1326,9 @@ rssPlot <- plotRSS(rss)
 plotly::ggplotly(rssPlot$plot)
 ```
 ***RSS by celltype:***
-![Alt text](RSS%20for%20MC%20TF%20by%20celltype.png)
+![Alt text](TF%20analysis/RSS%20for%20MC%20TF%20by%20celltype.png)
 ***RSS by group:***
-![Alt text](RSS%20for%20MC%20TF%20by%20group.png)
+![Alt text](TF%20analysis/RSS%20for%20MC%20TF%20by%20group.png)
 ```r
 rssPlot <- 
   plotRSS(
@@ -1341,8 +1343,8 @@ rssPlot <-
   col.high = '#FFCC33')
 rssPlot
 ```
-![Alt text](RSS%20by%20celltype-2.svg)
-![Alt text](RSS%20by%20group.svg)
+![Alt text](TF%20analysis/RSS%20by%20celltype-2.svg)
+![Alt text](TF%20analysis/RSS%20by%20group.svg)
 ### 3.2) Cellchat analysis
 **Epithelial cells annotation**
 ```r
@@ -1901,4 +1903,4 @@ visCluster(object = st.data,
            sample.col = allcolour)
 dev.off()
 ```
-![Alt text](sc_ggplot_gokegg_markgenes.svg)
+![Alt text](Basic%20analysis/sc_ggplot_gokegg_markgenes.svg)
