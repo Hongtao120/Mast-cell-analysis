@@ -1807,6 +1807,7 @@ visCluster(object = st.data,
            sample.col = allcolour)
 dev.off()
 ```
+**Integrate Heatmap with enrichment analysis dotplot:**
 ```r
 # prepare data from seurat object
 pbmc.markers = top20_MC
