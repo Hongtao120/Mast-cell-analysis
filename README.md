@@ -797,7 +797,7 @@ clusters_obs <- MC$celltype #提取celltype
 names(clusters_obs)<-df$Cells
 write.csv(clusters_obs, file = "./clusters_obs.csv")
 ```
-#### 2.2.2） Integrating `.loom` file with cell information from R
+#### 2.2.2) Integrating `.loom` file with cell information from R
 ```python
 import scvelo as scv
 import numpy as np
@@ -911,7 +911,7 @@ scv.tl.velocity(adata, mode = "stochastic")
 scv.tl.velocity_graph(adata)
 adata.write('data.h5ad')
 ```
-#### 2.2.3）Visualization by python
+#### 2.2.3) Visualization by python
 ```python
 palette = {"Mcpt9 high MC":"#D0AFC4",
            "Mcpt9 medium MC":"#89558D",
