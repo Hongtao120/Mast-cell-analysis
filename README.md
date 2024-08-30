@@ -1314,6 +1314,7 @@ Heatmap(
 ```
 ***Heatmap by Celltype:***
  ![Alt text](TF%20analysis/Heatmap%20for%20MC%20TF%20by%20celltype.svg)
+ 
 ***Heatmap by group:***
 ![Alt text](TF%20analysis/Heatmap%20for%20MC%20TF%20by%20group.svg)
 ```r
@@ -1326,6 +1327,7 @@ plotly::ggplotly(rssPlot$plot)
 ```
 ***RSS by celltype:***
 ![Alt text](TF%20analysis/RSS%20for%20MC%20TF%20by%20celltype.png)
+
 ***RSS by group:***
 ![Alt text](TF%20analysis/RSS%20for%20MC%20TF%20by%20group.png)
 ```r
@@ -1342,7 +1344,10 @@ rssPlot <-
   col.high = '#FFCC33')
 rssPlot
 ```
+***Dotplot by celltype:***
 ![Alt text](TF%20analysis/RSS%20by%20celltype-2.svg)
+
+***Dotplot by group:***
 ![Alt text](TF%20analysis/RSS%20by%20group.svg)
 ### 3.2) Cellchat analysis
 **Epithelial cells annotation**
