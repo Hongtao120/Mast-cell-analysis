@@ -1,6 +1,5 @@
 # Mast cell analysis based on total cite-seq dataset
 ---
-[TOC]
 **Batch effect is corrected by harmony**
 
 *Based on the following Seurat oject:*
