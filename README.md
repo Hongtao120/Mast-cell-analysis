@@ -1791,7 +1791,9 @@ visCluster(object = st.data,
            add.bar = T,
            sample.col = allcolour)
 dev.off()
-
+```
+![Alt text](Basic%20analysis/kegg.svg)
+```r
 pdf('bp.pdf',height = 10,width = 20,onefile = F)
 visCluster(object = st.data,
            plot.type = "both",
