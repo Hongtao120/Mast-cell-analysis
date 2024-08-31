@@ -1105,7 +1105,7 @@ for cluster in ['Cycling MC', 'Lrmda+ MC', 'Mcpt9 high MC', 'Mcpt9 medium MC', '
 ![Alt text](RNA%20velocity/figures/scvelo_Top-likelihood%20genes.svg)
 ## 3) Function of Mast cell
 ### 3.1) TF analysis by pySCENIC
-
+#### 3.1.1) Data preprocess
 **Change Seurat to ```.csv``` for ```.loom``` file creation**
 ```r
 # 提取原始数据的表达矩阵
@@ -1160,7 +1160,7 @@ row_attrs = {"Gene": np.array(x.var_names),}
 col_attrs = {"CellID": np.array(x.obs_names)}
 lp.create("sce.loom",x.X.transpose(),row_attrs,col_attrs)
 ```
-**Run pySCENIC in Cluster**
+#### 3.1.2) Run pySCENIC in Cluster
 ```bash
 #!/bin/bash
 #SBATCH -J test_job
@@ -1192,7 +1192,7 @@ reg.csv \
 --output sample_SCENIC.loom \
 --num_workers 3
 ```
-**Visualization by R**
+#### 3.1.3) Visualization by R
 ```r
 # pyscenic可视化
 setwd("C:/Users/Taotao/OneDrive/桌面/data/2024.8.14 harmony analysis")
@@ -1349,6 +1349,34 @@ rssPlot
 
 ***Dotplot by group:***
 ![Alt text](TF%20analysis/RSS%20by%20group.svg)
+**Waterfall plot for top5 regulons:**
+```r
+rss <- calcRSS(sub_regulonAUC, sce$celltype)
+rss <- na.omit(rss)
+topN = 5
+plot <- list()
+for (i in colnames(rss)){
+  df.i <- data.frame(SpecificityScore=rss[,i], labels=rownames(rss))
+  df.i <- arrange(df.i, desc(SpecificityScore)) %>% as.data.frame()
+  df.i$Regulons <- 1:nrow(df.i)
+  df.i$color <- ifelse(df.i$Regulons <= topN, "#E9E55A", "grey")
+  df.i$labels[df.i$Regulons > topN] <- NA
+  p <- ggplot(df.i, aes(Regulons, SpecificityScore)) +
+    geom_point(size = 3, color = df.i$color) +
+    geom_label_repel(aes(label=labels), size=3.5) +
+    scale_x_continuous(limits = c(0,125)) +
+    ggtitle(i) + xlab("Regulons Rank") + ylab("Specificity Score") +
+    theme_bw(base_size = 12) +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title = element_text(hjust = 0.5))
+  plot[[i]] <- p
+}
+p <- wrap_plots(plot, ncol = 3)
+ggsave("./TF analysis/top5RSS.svg", p, width = 9.5, height = 7, limitsize = F)
+```
+![Alt text](TF%20analysis/top5RSS.svg)
+
 ### 3.2) Cellchat analysis
 **Epithelial cells annotation**
 ```r
