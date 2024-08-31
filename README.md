@@ -1407,7 +1407,7 @@ p <- DoHeatmap(sce, features = top, label = F,group.colors = allcolour, group.by
   scale_fill_gradientn(colors = c("#88558D","black","#E9E55A")) + theme(text=element_text(size=14,family="arial"))+
   guides(fill = NULL)
 ```
-![Alt text](TF%20analysis/top10regulon.tiff)
+![Alt text](TF%20analysis/top10regulon.svg)
 ### 3.2) Cellchat analysis
 **Epithelial cells annotation**
 ```r
