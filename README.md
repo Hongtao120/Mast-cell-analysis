@@ -1377,6 +1377,37 @@ ggsave("./TF analysis/top5RSS.svg", p, width = 9.5, height = 7, limitsize = F)
 ```
 ![Alt text](TF%20analysis/top5RSS.svg)
 
+```r
+# 计算活性阈值
+regulonAUC <- assay(sub_regulonAUC)
+bin.T <- AUCell_exploreThresholds(regulonAUC,
+                                  smallestPopPercent = 0.25,
+                                  assignCells = TRUE,
+                                  plotHist = FALSE,
+                                  verbose = FALSE
+                                  )
+# 二进制转化
+regulonBin <- lapply(rownames(regulonAUC), function(reg){
+  as.numeric(colnames(regulonAUC)) %in% bin.T[[reg]][["assignment"]]
+})
+
+regulonBin <- do.call("rbind", regulonBin)
+dimnames(regulonBin) <- list(rownames(regulonAUC), colnames(regulonAUC))
+```
+```r
+# 差异分析, Seurat
+sce[["Regulon"]] <- CreateAssayObject(counts = regulonAUC)
+sce[["binRegulon"]] <- CreateAssayObject(counts = regulonBin)
+DefaultAssay(sce) <- "Regulon"
+sce <- ScaleData(sce, features = rownames(sce))
+Idents(sce) <- "celltype"
+deg <- FindAllMarkers(sce, only.pos = T, logfc.threshold = 0)
+top <- group_by(deg, cluster) %>% top_n(10, avg_log2FC) %>% pull(gene) %>% unique()
+p <- DoHeatmap(sce, features = top, label = F,group.colors = allcolour, group.by = "celltype",angle = 45)+
+  scale_fill_gradientn(colors = c("#88558D","black","#E9E55A")) + theme(text=element_text(size=14,family="arial"))+
+  guides(fill = NULL)
+```
+![Alt text](TF%20analysis/top10regulon.tiff)
 ### 3.2) Cellchat analysis
 **Epithelial cells annotation**
 ```r
