@@ -1819,7 +1819,9 @@ st.data <- prepareDataFromscRNA(object = pbmc,
 
 # check
 str(st.data)
+# In this dataset, C4 is missing. Therefore, I change C5 to C4 to prevent the plotting bug
 st.data[["wide.res"]][["cluster"]][st.data[["wide.res"]][["cluster"]] == 5] <- 4
+data <- st.data[["wide.res"]]
 data$cluster_name <- gsub("cluster 5 \\(20\\)", "cluster 4 (20)", data$cluster_name)
 data$cluster <- gsub("5", "4", data$cluster)
 st.data[['long.res']] <- data
@@ -1844,7 +1846,7 @@ enrich.KEGG <- enrichCluster(object = st.data,
 ```
 
 ```r
-palette = c("Grays","Blues2","Purples2","Reds2")
+palette = c("Grays","Blues2","Purples2","Reds2") # according to the cluster number
 
 # loop
 lapply(seq_along(unique(enrich$group)), function(x){
@@ -1893,7 +1895,7 @@ lapply(seq_along(unique(enrich$group)), function(x){
 }) -> gglist
 
 # assign names
-names(gglist) <- paste("C",1:4,sep = "")
+names(gglist) <- paste("C",1:4,sep = "") # according to the cluster number
 ```
 
 ```r
@@ -1903,7 +1905,7 @@ visCluster(object = st.data,
            line.side = "left",
            column_names_rot = 45,
            markGenes = markGenes,
-           cluster.order = c(1:4),
+           cluster.order = c(1:4), # according to the cluster number
            ggplot.panel.arg = c(5,0.5,32,"grey90",NA),
            gglist = gglist,
            show_row_dend = F,
