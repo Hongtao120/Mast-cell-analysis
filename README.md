@@ -11,7 +11,7 @@
  library(clustree)
  library(harmony)
  library(tidydr)
- setwd("C:/Users/Taotao/OneDrive/桌面/data/Thymus")
+ setwd("D:/data/Thymus")
  MC <- readRDS("./3cell.rds")
   ```
 ## 1) Recluster of Mast cells
@@ -925,23 +925,23 @@ palette = {"Mcpt9 high MC":"#D0AFC4",
            "LP-hpD14":"#415284"}
 ```
 ```python
-scv.pl.velocity_embedding_grid(adata, basis='umap', color='celltype', save='embedding_grid.svg', title='RNA Velocity', scale=0.25, palette = palette)
+scv.pl.velocity_embedding_grid(adata, basis='umap', color='celltype', save='embedding_grid.svg', title='RNA Velocity', scale=0.25, palette = palette, figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_embedding_grid.svg)
 ```python
-scv.pl.velocity_embedding_stream(adata, basis='umap', color='celltype', save='embedding_stream.svg', title='RNA Velocity', palette = palette)
+scv.pl.velocity_embedding_stream(adata, basis='umap', color='celltype', save='embedding_stream.svg', title='RNA Velocity', palette = palette, figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_embedding_stream.svg)
 ```python
-scv.pl.velocity_embedding_grid(adata, basis='dm', color='celltype', save='embedding_grid_dm.svg', title='RNA Velocity', scale=0.25, palette = palette)
+scv.pl.velocity_embedding_grid(adata, basis='dm', color='celltype', save='embedding_grid_dm.svg', title='RNA Velocity', scale=0.25, palette = palette, figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_embedding_grid_dm.svg)
 ```python
-scv.pl.velocity_embedding_stream(adata, basis='dm', color='celltype', save='embedding_stream_dm.svg', title='RNA Velocity', palette = palette)
+scv.pl.velocity_embedding_stream(adata, basis='dm', color='celltype', save='embedding_stream_dm.svg', title='RNA Velocity', palette = palette, figsize=(4.5, 4) ,legend_loc='right')
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_embedding_stream_dm.svg)
 ```python
-scv.pl.velocity_embedding(adata, arrow_length=3, arrow_size=2, dpi=120, color='celltype', save='arrow_stream.svg', title='RNA Velocity', palette = palette)
+scv.pl.velocity_embedding(adata, arrow_length=3, arrow_size=2, dpi=120, color='celltype', save='arrow_stream.svg', title='RNA Velocity', palette = palette, figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_arrow_stream.svg)
 Setting the index as gene names:
@@ -950,8 +950,8 @@ adata.var.index = adata.var['var_names']
 ```
 Interprete the velocities
 ```python
-scv.pl.velocity(adata, ['Top2a',  'Lrmda', 'Nr4a1', 'Mcpt9'], ncols=2, color='celltype',save='gene.svg')
-scv.pl.velocity(adata, ['Top2a',  'Lrmda', 'Nr4a1', 'Mcpt9'], ncols=2, color='celltype',save='gene_dm.svg', basis='dm')
+scv.pl.velocity(adata, ['Top2a',  'Lrmda', 'Nr4a1', 'Mcpt9'], ncols=2, color='celltype',save='gene.svg', figsize=(4.5, 4))
+scv.pl.velocity(adata, ['Top2a',  'Lrmda', 'Nr4a1', 'Mcpt9'], ncols=2, color='celltype',save='gene_dm.svg', basis='dm', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_gene.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_gene_dm.svg)
@@ -959,8 +959,8 @@ scv.pl.velocity(adata, ['Top2a',  'Lrmda', 'Nr4a1', 'Mcpt9'], ncols=2, color='ce
 Velocities in cycling progenitors
 ```python
 scv.tl.score_genes_cell_cycle(adata)
-scv.pl.scatter(adata, color_gradients=['S_score', 'G2M_score'], smooth=True, perc=[5, 95], save='cycling progenitors.svg')
-scv.pl.scatter(adata, color_gradients=['S_score', 'G2M_score'], smooth=True, perc=[5, 95], basis = "dm" ,save='cycling progenitors_dm.svg')
+scv.pl.scatter(adata, color_gradients=['S_score', 'G2M_score'], smooth=True, perc=[5, 95], save='cycling progenitors.svg', figsize=(4.5, 4))
+scv.pl.scatter(adata, color_gradients=['S_score', 'G2M_score'], smooth=True, perc=[5, 95], basis = "dm" ,save='cycling progenitors_dm.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_cycling%20progenitors.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_cycling%20progenitors_dm.svg)
@@ -975,8 +975,8 @@ scv.pl.scatter(adata, list(s_genes[:2]) + list(g2m_genes[:3]), save='cycling mar
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_cycling%20marker.svg)
 ```python
-scv.pl.velocity(adata, ['Hells', 'Top2a'], ncols=2, add_outline=True, color='celltype', save='hells and top2a.svg')
-scv.pl.velocity(adata, ['Hells', 'Top2a'], ncols=2, add_outline=True, color='celltype', basis = 'dm',save='hells and top2a_dm.svg')
+scv.pl.velocity(adata, ['Hells', 'Top2a'], ncols=2, add_outline=True, color='celltype', save='hells and top2a.svg', figsize=(4.5, 4))
+scv.pl.velocity(adata, ['Hells', 'Top2a'], ncols=2, add_outline=True, color='celltype', basis = 'dm',save='hells and top2a_dm.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_hells%20and%20top2a.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_hells%20and%20top2a_dm.svg)
@@ -985,8 +985,8 @@ Speed and coherence
 ```python
 scv.tl.velocity_confidence(adata)
 keys = 'velocity_length', 'velocity_confidence'
-scv.pl.scatter(adata, c=keys, cmap='coolwarm', perc=[5, 95], save='speed and coherence.svg')
-scv.pl.scatter(adata, c=keys, cmap='coolwarm', perc=[5, 95], basis = 'dm', save='speed and coherence_dm.svg')
+scv.pl.scatter(adata, c=keys, cmap='coolwarm', perc=[5, 95], save='speed and coherence.svg', figsize=(4.5, 4))
+scv.pl.scatter(adata, c=keys, cmap='coolwarm', perc=[5, 95], basis = 'dm', save='speed and coherence_dm.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_speed%20and%20coherence.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_speed%20and%20coherence_dm.svg)
@@ -997,16 +997,16 @@ df.style.background_gradient(cmap='coolwarm', axis=1)
 ```
 Velocity graph and pseudotime
 ```python
-scv.pl.velocity_graph(adata, threshold=.3, save='velocitygraph.svg', color='celltype', palette = palette)
-scv.pl.velocity_graph(adata, threshold=.3, save='velocitygraph_dm.svg', color='celltype', palette = palette, basis = 'dm')
+scv.pl.velocity_graph(adata, threshold=.3, save='velocitygraph.svg', color='celltype', palette = palette, figsize=(4.5, 4))
+scv.pl.velocity_graph(adata, threshold=.3, save='velocitygraph_dm.svg', color='celltype', palette = palette, basis = 'dm', figsize=(4.5, 4) ,legend_loc='right')
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_velocitygraph.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_velocitygraph_dm.svg)
 
 ```python
 scv.tl.velocity_pseudotime(adata)
-scv.pl.scatter(adata, color='velocity_pseudotime', cmap='gnuplot', save='pseudotime.svg')
-scv.pl.scatter(adata, color='velocity_pseudotime', cmap='gnuplot', basis = 'dm',save='pseudotime_dm.svg')
+scv.pl.scatter(adata, color='velocity_pseudotime', cmap='gnuplot', save='pseudotime.svg', figsize=(4.5, 4))
+scv.pl.scatter(adata, color='velocity_pseudotime', cmap='gnuplot', basis = 'dm',save='pseudotime_dm.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_pseudotime.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_pseudotime_dm.svg)
@@ -1028,9 +1028,9 @@ df.style.background_gradient(cmap='Blues').format('{:.2g}')
 ```
 ```python
 scv.pl.paga(adata, basis='umap', size=50, alpha=.1,
-            min_edge_width=2, node_size_scale=1.5, save='paga.svg')
+            min_edge_width=2, node_size_scale=1.5, save='paga.svg', figsize=(4.5, 4))
 scv.pl.paga(adata, basis='dm', size=50, alpha=.1,
-            min_edge_width=2, node_size_scale=1.5, save='paga_dm.svg')
+            min_edge_width=2, node_size_scale=1.5, save='paga_dm.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_paga.svg)
 ![Alt text](RNA%20velocity/figures/scvelo_paga_dm.svg)
@@ -1044,8 +1044,8 @@ adata.var.index = adata.var['var_names']
 ```
 Running the dynamical model can take a while. Hence, you may want to store the results for re-use, with `adata.write('adata.h5ad')`, which can later be read with `adata = scv.read('adata.h5ad')`.
 ```python
-scv.pl.velocity_embedding_stream(adata, basis='umap', save='dynamicalstream.svg', title='RNA Velocity Dynamical Model', color = 'celltype', palette = palette)
-scv.pl.velocity_embedding_stream(adata, basis='dm', save='dynamicalstream_dm.svg', title='RNA Velocity Dynamical Model', color = 'celltype', palette = palette)
+scv.pl.velocity_embedding_stream(adata, basis='umap', save='dynamicalstream.svg', title='RNA Velocity Dynamical Model', color = 'celltype', palette = palette, figsize=(4.5, 4))
+scv.pl.velocity_embedding_stream(adata, basis='dm', save='dynamicalstream_dm.svg', title='RNA Velocity Dynamical Model', color = 'celltype', palette = palette, figsize=(4.5, 4))
 ```
 
 Kinetic rate paramters
@@ -1066,7 +1066,7 @@ Latent time
 
 ```python
 scv.tl.latent_time(adata)
-scv.pl.scatter(adata, color='latent_time', color_map='gnuplot', size=80, save='Latent time.svg')
+scv.pl.scatter(adata, color='latent_time', color_map='gnuplot', size=80, save='Latent time.svg', figsize=(4.5, 4))
 ```
 ```python
 top_genes = adata.var['fit_likelihood'].sort_values(ascending=False).index[:300]
@@ -1078,7 +1078,7 @@ Top-likelihood genes
 
 ```python
 top_genes = adata.var['fit_likelihood'].sort_values(ascending=False).index
-scv.pl.scatter(adata, basis=top_genes[:15], ncols=5, frameon=False, save='Top-likelihood genes.svg', color = 'celltype')
+scv.pl.scatter(adata, basis=top_genes[:15], ncols=5, frameon=False, save='Top-likelihood genes.svg', color = 'celltype', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_Top-likelihood%20genes.svg)
 
@@ -1100,7 +1100,7 @@ df.head(5)
 ```
 ```python
 for cluster in ['Cycling MC', 'Lrmda+ MC', 'Mcpt9 high MC', 'Mcpt9 medium MC', 'Nr4a1 high MC']:
-    scv.pl.scatter(adata, df[cluster][:5], ylabel=cluster, frameon=False, save = '$cluster.svg')
+    scv.pl.scatter(adata, df[cluster][:5], ylabel=cluster, frameon=False, save = '$cluster.svg', figsize=(4.5, 4))
 ```
 ![Alt text](RNA%20velocity/figures/scvelo_Top-likelihood%20genes.svg)
 ## 3) Function of Mast cell
@@ -1511,7 +1511,7 @@ VlnPlot(MC, features = "Cx3cr1", pt.size = 0)&
 ### 3.3) Mast cell gene set scoring
 #### 3.3.1) irGSEA
 ```r
-setwd("C:/Users/Taotao/OneDrive/桌面/data/2024.8.14 harmony analysis")
+setwd("D:/data/2024.8.14 harmony analysis")
 MC <- readRDS("./MC_by_trace.rds")
 ```
 ```r
