@@ -1734,6 +1734,7 @@ densityheatmap <- irGSEA.densityheatmap(object = MC,
 ```r
 MC$celltype <- factor(MC$celltype, levels = c("Cycling MC", "Lrmda+ MC", "Mcpt9 high MC", "Mcpt9 medium MC", "Nr4a1 high MC"))
 Idents(MC) <- "celltype"
+set.seed(114514)
 sce.markers <-
   FindAllMarkers(
     object = MC,
