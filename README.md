@@ -485,7 +485,7 @@ saveRDS(Mastcell, "./MC_by_trace.rds")
 
 ### 2.1) Trajectory inference
 
-#### 2.1.1) Diffusion Map
+#### 2.1.1a) Diffusion Map by R
 ```r
 setwd("C:/Users/Taotao/OneDrive/桌面/data/2024.8.14 harmony analysis")
 MC <- readRDS(file = "./MC_by_trace.rds")
@@ -571,6 +571,23 @@ p #1000*600
 ![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20celltype.png)
 ![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20group.png)
 ![Alt text](Diffusionmap/3D%20diffusionmap%20for%20MC%20tissue.png)
+#### 2.1.1b) Diffusion Map by python
+```r
+library(SeuratDisk)
+library(Seurat)
+#seurat2h5seurat中间过渡
+SaveH5Seurat(MC,filename="test.h5seurat", overwrite = TRUE)
+#数据转为最终h5ad格式
+Convert("test.h5seurat", dest = "h5ad", overwrite = TRUE)
+```
+```python
+adata = sc.read('test.h5ad')
+sc.pp.neighbors(adata, n_neighbors=20, n_pcs=50, use_rep='X_harmony', method='gauss')
+sc.tl.diffmap(adata)
+adata.obsm['X_diffmap_'] = adata.obsm['X_diffmap'][:,1:]
+sc.pl.embedding(adata,'diffmap_',color='celltype',save = 'diffmap_sc.svg')
+sc.pl.embedding(adata,'diffmap_',color='celltype',save = 'diffmap_sc.pdf')
+```
 #### 2.1.2) dyno
 An R package that can choose the best TI method among 59 methods.
 
@@ -905,8 +922,8 @@ cell_clusters_ordered = cell_clusters_ordered.iloc[:,1:]
 adata.obs['celltype']=cell_clusters_ordered.values
 ```
 ```python
-scv.pp.filter_and_normalize(adata)
-scv.pp.moments(adata)
+scv.pp.filter_and_normalize(adata, min_shared_counts=20, n_top_genes=2000)
+scv.pp.moments(adata, n_pcs=30, n_neighbors=30)
 scv.tl.velocity(adata, mode = "stochastic")
 scv.tl.velocity_graph(adata)
 adata.write('data.h5ad')
