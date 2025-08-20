@@ -1,0 +1,91 @@
+# R
+.Rhistory
+.Rdata
+.RData
+.Ruserdata
+*.Rout
+.Rproj.user/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.env
+
+# Data files (large files that shouldn't be versioned)
+*.rds
+*.RDS
+*.h5ad
+*.loom
+*.h5
+*.h5seurat
+*.csv
+*.tsv
+*.txt
+*.feather
+*.tbl
+
+# Output directories (keep structure but not content)
+Basic analysis/*.svg
+Basic analysis/*.pdf
+Basic analysis/*.png
+Basic analysis/*.jpeg
+Basic analysis/*.tiff
+
+Diffusionmap/*.svg
+Diffusionmap/*.pdf  
+Diffusionmap/*.png
+Diffusionmap/*.html
+
+RNA velocity/figures/*.svg
+RNA velocity/figures/*.pdf
+RNA velocity/figures/*.png
+
+TF analysis/*.svg
+TF analysis/*.pdf
+TF analysis/*.png
+TF analysis/*.jpeg
+TF analysis/*.tiff
+
+Cellchat/*.svg
+Cellchat/*.pdf
+
+GSEA/*.svg  
+GSEA/*.pdf
+GSEA/*.png
+
+Projection/*.svg
+Projection/*.pdf
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+*.out
+*.err
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
